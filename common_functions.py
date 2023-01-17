@@ -42,6 +42,8 @@ def yolo_to_cv2(yolo_bb, height, width):
     # yolo_bb is list o a tuple
     # with the order of field as expected from Albumentations
     # class_num is the last one
+    # width, height are the width, height of the entire image
+    # w, h are for the BB
 
     # the last is the class_num, here not used
     x, y, w, h, _ = yolo_bb
