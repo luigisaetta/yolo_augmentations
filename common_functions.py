@@ -2,6 +2,7 @@ from os import path
 import glob
 import cv2
 import albumentations as A
+import matplotlib.pyplot as plt
 
 # read image yolo labels from yolo file
 # and returns in yolo format
@@ -80,3 +81,26 @@ def do_check(original_bb_list, trasformed_list):
     assert trasformed_list[-1][4] == 10
 
     return
+
+# Visualize the image with all the BB on top
+def show_image_and_bbs(img, list_bb):
+    # img is jpg and list_bb in yolo format
+    n_boxes = len(list_bb)
+    dh, dw, _ = img.shape
+    new_image = img.copy()
+    
+    # iterate over all bb
+    for i, bb in enumerate(list_bb):
+        l, r, t, b = yolo_to_cv2(bb, dh, dw)
+
+        # we show only the global BB in red to avoid messing the image
+        if i == n_boxes - 1:
+            color = (255, 0, 0)  # red
+            tickness = 2
+        else:
+            color = (0, 255, 0)
+            tickness = 1
+
+        new_image = cv2.rectangle(new_image, (l, t), (r, b), color, tickness)
+
+    plt.imshow(new_image);
