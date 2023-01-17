@@ -40,23 +40,21 @@ def write_bb(new_label_path, yolo_bb_list):
 # convert a single bb for cv2
 def yolo_to_cv2(yolo_bb, height, width):
     # yolo_bb is list o a tuple
+    # with the order of field as expected from Albumentations
+    # class_num is the last one
 
     # the last is the class_num, here not used
     x, y, w, h, _ = yolo_bb
 
-    # x lower left
-    l = int((x - w / 2.0) * width)
+    # x lower left. max to restrict if outside
+    # if < 0 then 0
+    l = max(0, int((x - w / 2.0) * width))
     # x upper right
-    r = int((x + w / 2.0) * width)
+    r = min(int((x + w / 2.0) * width), width - 1)
     # y lower left
-    t = int((y - h / 2.0) * height)
+    t = max(0, int((y - h / 2.0) * height))
     # y upper right
-    b = int((y + h / 2.0) * height)
-
-    l = max(0, l)
-    t = max(0, t)
-    r = min(r, width - 1)
-    b = min(b, height - 1)
+    b = min(int((y + h / 2.0) * height), height - 1)
 
     return [l, r, t, b]
 
