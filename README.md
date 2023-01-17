@@ -40,10 +40,13 @@ t = int((y - h / 2.0) * height)
 b = int((y + h / 2.0) * height)
 ```
 
-    
 ## Features.
 * functions to read/write YOLO v5 label files
 * functions to switch from YOLO to CV2 BB format
+* function to show an image + BB
 * Augmentation based on Albumentations
 * NB showing how to plot an image with BB
 
+## Albumentations
+
+Usefule documentation [here](https://albumentations.ai/docs/getting_started/bounding_boxes_augmentation/)
