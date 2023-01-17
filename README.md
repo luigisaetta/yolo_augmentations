@@ -8,14 +8,14 @@ based on **YOLO V5/V8**.
 These kind of tools are expecially useful if you have **few labeled images** to train your YOLO model.
 
 ## Technical specifications.
-When we **annotate** a set of images to train an Object Detection (OD) model you need to define the region in the image containing an Object and the class of that object, for each of the Objects that you want to identify in the image.
+When we **annotate** a set of images to train an Object Detection (OD) model we need to define the region in the image containing an Object and the class of that object, for each of the Objects that you want to identify in the image.
 
 In many OD models the region is a rectangle, called **Bounding Box Rectangle (BB)**, with sides parallel to x and y axes.
 
 In YOLO v5 (and it is ok also for new v8) to register the annotation this is the format used:
 1. For each image you have, in the labels directory, an associated txt file
 2. The txt file contains a row for each BB rectangle
-3. The format of each row is the following: class_num xc yc w h
+3. The format of each row is the following: class_num x y w h
 
 for example:
 ```
@@ -25,7 +25,7 @@ for example:
 ```
 
 One important thing to know is the way the rectangle is defined:
-* xc, yc are the coordinates of the center, normalized (in other words, divided by width and height of the image in pixel)
+* x, y are the coordinates of the center, normalized (in other words, divided by width and height of the image in pixel)
 * w and h are the width and the height of the BB, again normalized.
 
 For this reason we have in the common_function.py module this code to get the BB to be used in cv2
